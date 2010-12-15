@@ -1,0 +1,25 @@
+smtptest.py: command-line smtp test mail sender
+
+https://github.com/turbodog/python-smtp-mail-sending-tester
+
+Usage: python smtptest.py [options] fromaddress toaddress serveraddress 
+Options:
+  -h, --help            show this help message and exit
+  -t, --usetls          Connect using TLS, default is false
+  -s, --usessl          Connect using SSL, default is false
+  -n nnn, --port=nnn    SMTP server port
+  -u username, --username=username
+                        SMTP server auth username
+  -p password, --password=password
+                        SMTP server auth password
+  -v, --verbose         Verbose message printing
+  -d n, --debuglevel=n  Set to 1 to print smtplib.send messages
+
+Examples:
+	python smtptest.py bob@example.com mary@example.com mail.example.com
+	python smtptest.py --debuglevel 1 --usetls -u bob -p xyzzy "Bob <bob@example.com>" mary@example.com mail.example.com
+
+At verbose == False and debuglevel == 0, smtptest will either succeed silently or print an error. Setting verbose or a debuglevel to 1 will generate intermediate output.
+
+See also http://docs.python.org/library/smtplib.html
+
