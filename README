@@ -1,6 +1,7 @@
 smtptest.py: command-line smtp test mail sender
 
-https://github.com/turbodog/python-smtp-mail-sending-tester
+I use this to programmatically test the security of my email server setups. With this Python app it's easy to script various combinations to SMTP sending options to make sure your email server behaves as you expect, both inside the firewall and out.
+
 
 Usage: python smtptest.py [options] fromaddress toaddress serveraddress 
 Options:
