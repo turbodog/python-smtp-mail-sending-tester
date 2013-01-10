@@ -27,7 +27,8 @@ fromaddr = ""
 toaddr = ""
 serveraddr = ""
 
-parser = OptionParser()
+usage = "Usage: %prog [options] fromaddress toaddress serveraddress"
+parser = OptionParser(usage=usage)
 
 parser.set_defaults(usetls=False)
 parser.set_defaults(usessl=False)
