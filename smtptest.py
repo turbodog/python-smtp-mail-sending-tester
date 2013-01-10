@@ -60,18 +60,18 @@ now = strftime("%Y-%m-%d %H:%M:%S")
 msg = "From: %s\r\nTo: %s\r\nSubject: Test Message from smtptest at %s\r\n\r\nTest message from the smtptest tool sent at %s" % (fromaddr, toaddr, now, now)
 
 if options.verbose:
-	print 'usetls: ', options.usetls
-	print 'usessl:', options.usessl
-	print 'from address:', fromaddr
-	print 'to address:', toaddr
-	print 'server address:', serveraddr
-	print 'server port:', options.serverport
-	print 'smtp username:', options.SMTP_USER
-	print 'smtp password: *****'
-	print 'smtplib debuglevel:', options.debuglevel
-	print "-- Message body ---------------------"
-	print msg
-	print "-------------------------------------"
+	print('usetls:', options.usetls)
+	print('usessl:', options.usessl)
+	print('from address:', fromaddr)
+	print('to address:', toaddr)
+	print('server address:', serveraddr)
+	print('server port:', options.serverport)
+	print('smtp username:', options.SMTP_USER)
+	print('smtp password: *****')
+	print('smtplib debuglevel:', options.debuglevel)
+	print("-- Message body ---------------------")
+	print(msg)
+	print("-------------------------------------")
 
 server = None
 if options.usessl:
