@@ -8,7 +8,8 @@ Examples:
 	python smtptest.py bob@example.com mary@example.com mail.example.com
 	python smtptest.py --debuglevel 1 --usetls -u bob -p xyzzy "Bob <bob@example.com>" mary@example.com mail.example.com
 
-At verbose == False and debuglevel == 0, smtptest will either succeed silently or print an error. Setting verbose or a debuglevel to 1 will generate intermediate output.
+At verbose == False and debuglevel == 0, smtptest will either succeed silently or print an error. Setting verbose or a 
+debuglevel to 1 will generate intermediate output.
 
 See also http://docs.python.org/library/smtplib.html
 
@@ -83,8 +84,9 @@ else:
 server.set_debuglevel(options.debuglevel)
 server.connect(serveraddr, options.serverport)
 server.ehlo()
-if options.usetls: server.starttls()
-server.ehlo()
+if options.usetls:
+	server.starttls()
+        server.ehlo()
 if options.SMTP_USER != "": server.login(options.SMTP_USER, options.SMTP_PASS)
 server.sendmail(fromaddr, toaddr, msg)
 server.quit()
