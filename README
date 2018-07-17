@@ -8,6 +8,8 @@ Options:
   -h, --help            show this help message and exit
   -t, --usetls          Connect using TLS, default is false
   -s, --usessl          Connect using SSL, default is false
+  -x, --senddetails     Details of test (server, port, etc..) are included
+                        in the email.
   -n nnn, --port=nnn    SMTP server port
   -u username, --username=username
                         SMTP server auth username

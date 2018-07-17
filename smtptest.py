@@ -32,6 +32,7 @@ parser = OptionParser(usage=usage)
 
 parser.set_defaults(usetls=False)
 parser.set_defaults(usessl=False)
+parser.set_defaults(senddetails=False)
 parser.set_defaults(serverport=25)
 parser.set_defaults(SMTP_USER="")
 parser.set_defaults(SMTP_PASS="")
@@ -40,6 +41,7 @@ parser.set_defaults(verbose=False)
 
 parser.add_option("-t", "--usetls", action="store_true", dest="usetls", default=False, help="Connect using TLS, default is false")
 parser.add_option("-s", "--usessl", action="store_true", dest="usessl", default=False, help="Connect using SSL, default is false")
+parser.add_option("-x", "--senddetails", action="store_true", dest="senddetails", default=False, help="Send test details in email, default is false")
 parser.add_option("-n", "--port", action="store", type="int", dest="serverport", help="SMTP server port", metavar="nnn")
 parser.add_option("-u", "--username", action="store", type="string", dest="SMTP_USER", help="SMTP server auth username", metavar="username")
 parser.add_option("-p", "--password", action="store", type="string", dest="SMTP_PASS", help="SMTP server auth password", metavar="password")
@@ -59,6 +61,19 @@ serveraddr = args[2]
 now = strftime("%Y-%m-%d %H:%M:%S")
 
 msg = "From: %s\r\nTo: %s\r\nSubject: Test Message from smtptest at %s\r\n\r\nTest message from the smtptest tool sent at %s" % (fromaddr, toaddr, now, now)
+
+if options.senddetails:
+        msg += "\r\n\r\nOptions used:"
+        msg += "\r\n  usetls: %s" % options.usetls
+        msg += "\r\n  usessl: %s" % options.usessl
+        msg += "\r\n  from address: %s " % fromaddr
+        msg += "\r\n  to address: %s" % toaddr
+        msg += "\r\n  server address: %s" % serveraddr
+        msg += "\r\n  server port: %s" % options.serverport
+        if options.SMTP_USER != "": msg += "\r\n  smtp username: %s" % options.SMTP_USER
+        if options.SMTP_PASS != "": msg += "\r\n  smtp password: *****"
+        msg += "\r\n"
+
 
 if options.verbose:
 	print('usetls:', options.usetls)
