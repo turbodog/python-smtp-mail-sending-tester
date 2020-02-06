@@ -77,8 +77,10 @@ if options.verbose:
 server = None
 if options.usessl:
 	server = smtplib.SMTP_SSL()
+	if sys.version_info >= (3, 0): server = smtplib.SMTP_SSL(serveraddr)
 else:
 	server = smtplib.SMTP()
+	if sys.version_info >= (3, 0): server = smtplib.SMTP(serveraddr)
 
 server.set_debuglevel(options.debuglevel)
 server.connect(serveraddr, options.serverport)
