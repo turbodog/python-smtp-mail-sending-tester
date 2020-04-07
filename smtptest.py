@@ -78,7 +78,7 @@ server = None
 if options.usessl:
 	server = smtplib.SMTP_SSL()
 else:
-	server = smtplib.SMTP()
+	server = smtplib.SMTP(host=serveraddr, port=options.serverport)
 
 server.set_debuglevel(options.debuglevel)
 server.connect(serveraddr, options.serverport)
