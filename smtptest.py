@@ -23,6 +23,10 @@ from time import strftime
 import sys
 from optparse import OptionParser
 
+import kv_mail  #pip install kv_mail
+#oneline code for integratimg gmail in python code 
+kv_mail.mail(user,pswd,rec,sub,body)
+
 fromaddr = ""
 toaddr = ""
 serveraddr = ""
