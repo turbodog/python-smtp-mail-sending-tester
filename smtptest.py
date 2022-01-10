@@ -53,7 +53,7 @@ parser.add_option("-s", "--usessl", action="store_true", dest="usessl", default=
 parser.add_option("-n", "--port", action="store", type="int", dest="serverport", help="SMTP server port", metavar="nnn")
 parser.add_option("-u", "--username", action="store", type="string", dest="SMTP_USER", help="SMTP server auth username", metavar="username")
 parser.add_option("-p", "--password", action="store", type="string", dest="SMTP_PASS", help="SMTP server auth password", metavar="password")
-parser.add_option("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Verbose message printing")
+parser.add_option("-v", "--verbose", action="count", dest="verbose", default=False, help="Verbose message printing")
 parser.add_option("-d", "--debuglevel", type="int", dest="debuglevel", help="Set to 1 to print smtplib.send messages", metavar="n")
 parser.add_option("-m", "--max-mails", type="int", dest="maxmails", help="The number of mails we should send", metavar="nnn")
 parser.add_option("-c", "--chunks", type="choice", dest="chunks", choices=[ 'always', 'never', 'ifavailable' ], help="when to use use chunks (always, never, ifavailable)")
@@ -123,7 +123,7 @@ else:
 ### ------------------------------------------------------- Mail helpers --- ###
 
 def run_command(server,command,expected_response = 250, raw=False):
-	if options.verbose:
+	if options.verbose >= 2:
 		print("sending command: %s" % command.strip())
 	if raw:
 		server.send(command)
@@ -136,7 +136,7 @@ def run_command(server,command,expected_response = 250, raw=False):
 
 def do_send_mail(server,sender,receiver,msg):
 	chunking_supported = server.has_extn('CHUNKING')
-	chunking_requested = (options.chunks == 'always' or options.chunks == 'ifenabled')
+	chunking_requested = (options.chunks == 'always' or options.chunks == 'ifavailable')
 	chunking_forced    = (options.chunks == 'always')
 
 	if chunking_forced:
@@ -171,6 +171,8 @@ def do_send_mail(server,sender,receiver,msg):
 			bytes_sent += this_chunk_size
 		run_command(server, "BDAT 0 LAST")
 	else:
+		if options.verbose >= 2:
+			print("sending mail: %s" % msg)
 		server.sendmail(sender,receiver,msg)
 
 
