@@ -76,7 +76,7 @@ if options.verbose:
 
 server = None
 if options.usessl:
-	server = smtplib.SMTP_SSL()
+	server = smtplib.SMTP_SSL(serveraddr)
 else:
 	server = smtplib.SMTP()
 
