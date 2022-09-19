@@ -21,6 +21,7 @@ __copyright__ = "(C) 2010 Lindsey Smith. GNU GPL 2 or 3."
 import smtplib
 from time import strftime
 import sys
+import random
 from optparse import OptionParser
 
 fromaddr = ""
@@ -57,8 +58,10 @@ toaddr = args[1]
 serveraddr = args[2]	
 	
 now = strftime("%Y-%m-%d %H:%M:%S")
+domain = fromaddr.split('@')[1]
+msgid = '<' + str(random.randrange(1, 10000, 1)) + '@' + domain + '>'
 
-msg = "From: %s\r\nTo: %s\r\nSubject: Test Message from smtptest at %s\r\n\r\nTest message from the smtptest tool sent at %s" % (fromaddr, toaddr, now, now)
+msg = "From: %s\r\nTo: %s\r\nSubject: Test Message from smtptest at %s\r\nMessage-ID: %s\r\n\r\nTest message from the smtptest tool sent at %s" % (fromaddr, toaddr, now, msgid, now)
 
 if options.verbose:
 	print('usetls:', options.usetls)
